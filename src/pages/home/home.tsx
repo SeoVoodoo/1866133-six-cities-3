@@ -55,6 +55,7 @@ const Home = ({offersCount, offersData}: HomePropsType):JSX.Element => (
                     type={offer.type}
                     price={offer.price}
                     isPremium={offer.isPremium}
+                    isFavorite={offer.isFavorite}
                     rating={offer.rating}
                     previewImage={offer.previewImage}
                   />
