@@ -1,3 +1,8 @@
+import {favoriteData} from '../../mocks/favorite-data/favorite-data';
+import HeaderLogo from './header-logo';
+
+const MOCK_EMAIL = 'Oliver.conner@gmail.com';
+const favoriteCount = favoriteData.length;
 
 const Header = () => (
   <header className="header">
@@ -5,7 +10,7 @@ const Header = () => (
       <div className="header__wrapper">
         <div className="header__left">
           <a className="header__logo-link header__logo-link--active">
-            <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+            <HeaderLogo />
           </a>
         </div>
         <nav className="header__nav">
@@ -14,8 +19,8 @@ const Header = () => (
               <a className="header__nav-link header__nav-link--profile" href="#">
                 <div className="header__avatar-wrapper user__avatar-wrapper">
                 </div>
-                <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                <span className="header__favorite-count">3</span>
+                <span className="header__user-name user__name">{MOCK_EMAIL}</span>
+                <span className="header__favorite-count">{favoriteCount}</span>
               </a>
             </li>
             <li className="header__nav-item">

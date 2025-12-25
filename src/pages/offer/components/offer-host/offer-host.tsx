@@ -8,13 +8,24 @@ type OfferHostPropsType = {
   description: string;
 }
 
+const AvatarSize = {
+  WIDTH: '74',
+  HEIGHT: '74'
+};
+
 const OfferHost = ({ host, description }: OfferHostPropsType): JSX.Element => (
 
   <div className="offer__host">
     <h2 className="offer__host-title">Meet the host</h2>
     <div className="offer__host-user user">
       <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-        <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
+        <img
+          className="offer__avatar user__avatar"
+          src={host.avatarUrl}
+          width={AvatarSize.WIDTH}
+          height={AvatarSize.HEIGHT}
+          alt="Host avatar"
+        />
       </div>
       <span className="offer__user-name">
         {host.name}

@@ -27,7 +27,7 @@ export const offerData = {
   'host': {
     'name': 'Oliver Conner',
     'avatarUrl': 'https://url-to-image/image.png',
-    'isPro': false
+    'isPro': true
   },
   'images': [
     'https://url-to-image/image.png'

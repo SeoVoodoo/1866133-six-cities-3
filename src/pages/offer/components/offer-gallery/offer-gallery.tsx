@@ -1,6 +1,6 @@
 //import React from 'react';
 
-const photos = [
+const MOCK_PHOTOS = [
   {
     id: 1,
     src: 'room.jpg',
@@ -38,7 +38,7 @@ const OfferGallery = () => (
   <div className="offer__gallery-container container">
     <div className="offer__gallery">
       {
-        photos.map((item) => (
+        MOCK_PHOTOS.map((item) => (
           <div className="offer__image-wrapper" key={item.id}>
             <img
               className="offer__image"

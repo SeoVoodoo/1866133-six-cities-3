@@ -27,24 +27,11 @@ const Offer = ():JSX.Element => {
     maxAdults
   } = offerData;
 
-  const insideList = [
-    'Wi-Fi',
-    'Washing machine',
-    'Towels',
-    'Heating',
-    'Coffee machine',
-    'Baby seat',
-    'Kitchen',
-    'Dishwasher',
-    'Cabel TV',
-    'Fridge'
-  ];
+  const IconSize = {
+    WIDTH: '31',
+    HEIGHT: '33'
+  };
 
-  // const Features = {
-  //   TYPE: type.toUpperCase(),
-  //   BEDROOMS: `${bedrooms} Bedrooms`,
-  //   MaxAdults: `Max ${maxAdults} adults`
-  // };
 
   return (
 
@@ -68,7 +55,11 @@ const Offer = ():JSX.Element => {
                   className="offer__bookmark-button button"
                   type="button"
                 >
-                  <svg className="offer__bookmark-icon" width="31" height="33">
+                  <svg
+                    className="offer__bookmark-icon"
+                    width={IconSize.WIDTH}
+                    height={IconSize.HEIGHT}
+                  >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">
@@ -83,7 +74,7 @@ const Offer = ():JSX.Element => {
                 maxAdults={maxAdults}
               />
               <OfferPrice price={price}/>
-              <OfferInside insideList={insideList}/>
+              <OfferInside />
               <OfferHost
                 host={host}
                 description={description}
