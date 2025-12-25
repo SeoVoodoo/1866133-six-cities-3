@@ -9,7 +9,8 @@ import OfferHost from './components/offer-host/offer-host';
 import OfferReviews from './components/offer-reviews/offer-reviews';
 import NearPlaces from './components/near-places/near-places';
 import OfferMap from './components/offer-map/offer-map';
-import { capitalizeFirstLetter } from '../../utils/common';
+import OfferPrice from './components/offer-price/offer-price';
+import OfferFeatures from './components/offer-features/offer-features';
 
 const Offer = ():JSX.Element => {
 
@@ -25,8 +26,6 @@ const Offer = ():JSX.Element => {
     host,
     maxAdults
   } = offerData;
-
-  const upgradeType = capitalizeFirstLetter(type);
 
   const insideList = [
     'Wi-Fi',
@@ -78,23 +77,17 @@ const Offer = ():JSX.Element => {
                 </button>
               </div>
               <OfferReting rating={rating} />
-              <ul className="offer__features">
-                <li className="offer__feature offer__feature--entire">
-                  {upgradeType}
-                </li>
-                <li className="offer__feature offer__feature--bedrooms">
-                  {`${bedrooms} Bedrooms`}
-                </li>
-                <li className="offer__feature offer__feature--adults">
-                  {`Max ${maxAdults} adults`}
-                </li>
-              </ul>
-              <div className="offer__price">
-                <b className="offer__price-value">&euro;{price}</b>
-                <span className="offer__price-text">&nbsp;night</span>
-              </div>
+              <OfferFeatures
+                type={type}
+                bedrooms={bedrooms}
+                maxAdults={maxAdults}
+              />
+              <OfferPrice price={price}/>
               <OfferInside insideList={insideList}/>
-              <OfferHost host={host} description={description}/>
+              <OfferHost
+                host={host}
+                description={description}
+              />
               <OfferReviews />
             </div>
           </div>
