@@ -27,7 +27,7 @@ const Offer = ():JSX.Element => {
     maxAdults
   } = offerData;
 
-  const IconSize = {
+  const ICON_SIZE = {
     WIDTH: '31',
     HEIGHT: '33'
   };
@@ -57,8 +57,8 @@ const Offer = ():JSX.Element => {
                 >
                   <svg
                     className="offer__bookmark-icon"
-                    width={IconSize.WIDTH}
-                    height={IconSize.HEIGHT}
+                    width={ICON_SIZE.WIDTH}
+                    height={ICON_SIZE.HEIGHT}
                   >
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

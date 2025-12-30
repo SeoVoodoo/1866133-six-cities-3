@@ -1,11 +1,15 @@
-//import React from 'react';
 
-const OptionNames = [
+const OPTION_NAMES = [
   {id: 1, name:'Popular'},
   {id: 2, name:'Price: low to high'},
   {id: 3, name:'Price: high to low'},
   {id: 4, name:'Top rated first'},
 ];
+
+const ARROW_SIZE = {
+  WIDTH: '7',
+  HEUGHT: '4'
+};
 
 
 const FormSorting = () => (
@@ -13,13 +17,13 @@ const FormSorting = () => (
     <span className="places__sorting-caption">Sort by&nbsp;</span>
     <span className="places__sorting-type" tabIndex={0}>
       Popular
-      <svg className="places__sorting-arrow" width="7" height="4">
+      <svg className="places__sorting-arrow" width={ARROW_SIZE.WIDTH} height={ARROW_SIZE.HEUGHT}>
         <use xlinkHref="#icon-arrow-select"></use>
       </svg>
     </span>
     <ul className="places__options places__options--custom places__options--opened">
       {
-        OptionNames.map((item) => (
+        OPTION_NAMES.map((item) => (
           <li
             key={item.id}
             tabIndex={0}

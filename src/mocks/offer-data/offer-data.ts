@@ -1,4 +1,6 @@
-export const offerData = {
+import { OfferType } from '../../types/offer.type.ts';
+
+export const offerData: OfferType = {
   'id': 'e7877aea-866c-40ba-979a-117c522be84b',
   'title': 'Beautiful & luxurious studio at great location',
   'type': 'apartment',

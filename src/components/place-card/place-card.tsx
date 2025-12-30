@@ -1,11 +1,15 @@
-import { PreviewImageSizeDefault, PreviewImageSizeFavorites } from '../../const';
+import { HousingType,
+  PREVIEW_IMAGE_SIZE_DEFAULT,
+  PREVIEW_IMAGE_SIZE_FAVORITES,
+  VALUTES
+} from '../../const';
+
 import { capitalizeFirstLetter } from '../../utils/common';
 import BookmarkButton from './bookmark-button/bookmark-button';
 
 type PlaceCardPropsType = {
   title: string;
-  //type: 'apartment' | 'room' | 'house' | 'hotel';
-  type: string;
+  type: `${HousingType.Apartment}` | `${HousingType.Hotel}` | `${HousingType.House}` | `${HousingType.Room}`;
   price: number;
   isPremium: boolean;
   isFavorite: boolean;
@@ -34,8 +38,14 @@ const PlaceCard = ({
           <img
             className="place-card__image"
             src={previewImage}
-            width={`${className === 'favorites' ? PreviewImageSizeFavorites.WIDTH : PreviewImageSizeDefault.WIDTH}`}
-            height={`${className === 'favorites' ? PreviewImageSizeFavorites.HEIGHT : PreviewImageSizeDefault.HEIGHT}`}
+            width={`${className === 'favorites'
+              ? PREVIEW_IMAGE_SIZE_FAVORITES.WIDTH
+              : PREVIEW_IMAGE_SIZE_DEFAULT.WIDTH}
+            `}
+            height={`${className === 'favorites'
+              ? PREVIEW_IMAGE_SIZE_FAVORITES.HEIGHT
+              : PREVIEW_IMAGE_SIZE_DEFAULT.HEIGHT}
+            `}
             alt="Place image"
           />
         </a>
@@ -43,7 +53,7 @@ const PlaceCard = ({
       <div className={`${className === 'favorites' ? 'favorites__card-info' : ''} place-card__info `}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price} </b>
+            <b className="place-card__price-value">{VALUTES.EURO}{price} </b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <BookmarkButton isFavorite={isFavorite} />

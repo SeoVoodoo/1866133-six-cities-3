@@ -5,8 +5,6 @@ import { favoriteData } from '../../mocks/favorite-data/favorite-data';
 
 const Favorites = () => {
 
-  const CLASS_NAME = 'favorites';
-
   const uniqueCityNames: string[] = [];
 
   favoriteData.forEach((item) => {
@@ -49,7 +47,7 @@ const Favorites = () => {
                               isFavorite={item.isFavorite}
                               rating={item.rating}
                               previewImage={item.previewImage}
-                              className={CLASS_NAME}
+                              className={'favorites'}
                             />
                           ))
                       }

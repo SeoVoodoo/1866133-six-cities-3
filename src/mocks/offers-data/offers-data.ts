@@ -1,7 +1,8 @@
+import { OffersType } from '../../types/offers.type';
 
-export const OffersData = [
+export const OffersData: OffersType = [
   {
-    'id': 'e7877aea-866c-40ba-979a-117c522be84b',
+    'id': 'e7877aea-866c-40ba-979a-117c522be84b1',
     'title': 'Beautiful & luxurious apartment at great location',
     'type': 'apartment',
     'price': 120,
@@ -24,7 +25,7 @@ export const OffersData = [
     'rating': 4.0
   },
   {
-    'id': '701ba372-1b78-4a55-888f-29d1483b57aa',
+    'id': '701ba372-1b78-4a55-888f-29d1483b57aa2',
     'title': 'Wood and stone place',
     'type': 'room',
     'price': 80,
@@ -47,7 +48,7 @@ export const OffersData = [
     'rating': 4.0
   },
   {
-    'id': 'ad6fa756-0413-45a4-9437-b7b70d9e7b13',
+    'id': 'ad6fa756-0413-45a4-9437-b7b70d9e7b133',
     'title': 'Canal View Prinsengracht',
     'type': 'apartment',
     'price': 132,
@@ -70,7 +71,7 @@ export const OffersData = [
     'rating': 4.0
   },
   {
-    'id': '3e74da40-d305-4690-ae9b-1fccb9066241',
+    'id': '3e74da40-d305-4690-ae9b-1fccb90662414',
     'title': 'Nice, cozy, warm big bed apartment',
     'type': 'apartment',
     'price': 180,
@@ -93,7 +94,7 @@ export const OffersData = [
     'rating': 4.8
   },
   {
-    'id': '604ce0a4-23e1-45da-9e8e-fe0967eba020',
+    'id': '604ce0a4-23e1-45da-9e8e-fe0967eba0205',
     'title': 'Wood and stone place',
     'type': 'room',
     'price': 80,
