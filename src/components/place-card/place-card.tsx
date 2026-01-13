@@ -1,7 +1,7 @@
 import { HousingType,
   PREVIEW_IMAGE_SIZE_DEFAULT,
   PREVIEW_IMAGE_SIZE_FAVORITES,
-  VALUTES
+  //VALUTES
 } from '../../const';
 
 import { capitalizeFirstLetter } from '../../utils/common';
@@ -53,7 +53,7 @@ const PlaceCard = ({
       <div className={`${className === 'favorites' ? 'favorites__card-info' : ''} place-card__info `}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">{VALUTES.EURO}{price} </b>
+            <b className="place-card__price-value">&euro;{price} </b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <BookmarkButton isFavorite={isFavorite} />

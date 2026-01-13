@@ -1,7 +1,5 @@
-//import React from 'react';
 import { offerData } from '../../mocks/offer-data/offer-data';
 import { otherOffersData } from '../../mocks/other-offers-data/other-offers-data';
-import Header from '../../components/header/header';
 import OfferGallery from './components/offer-gallery/offer-gallery';
 import OfferReting from './components/offer-rating/offer-reting';
 import OfferInside from './components/offer-inside/offer-inside';
@@ -35,64 +33,60 @@ const Offer = ():JSX.Element => {
 
 
   return (
-
-    <div className="page">
+    <main className="page__main page__main--offer">
       <Helmet>
         <title>Предложение по аренде жилья!</title>
       </Helmet>
-      <Header />
-      <main className="page__main page__main--offer">
-        <section className="offer">
-          <OfferGallery />
-          <div className="offer__container container">
-            <div className="offer__wrapper">
-              {isPremium && (
-                <div className="offer__mark">
-                  <span>Premium</span>
-                </div>
-              )}
-              <div className="offer__name-wrapper">
-                <h1 className="offer__name">
-                  {title}
-                </h1>
-                <button
-                  className="offer__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="offer__bookmark-icon"
-                    width={ICON_SIZE.WIDTH}
-                    height={ICON_SIZE.HEIGHT}
-                  >
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">
-                    ${isFavorite ? 'In bookmarks' : 'To bookmarks'}
-                  </span>
-                </button>
+      <section className="offer">
+        <OfferGallery />
+        <div className="offer__container container">
+          <div className="offer__wrapper">
+            {isPremium && (
+              <div className="offer__mark">
+                <span>Premium</span>
               </div>
-              <OfferReting rating={rating} />
-              <OfferFeatures
-                type={type}
-                bedrooms={bedrooms}
-                maxAdults={maxAdults}
-              />
-              <OfferPrice price={price}/>
-              <OfferInside />
-              <OfferHost
-                host={host}
-                description={description}
-              />
-              <OfferReviews />
+            )}
+            <div className="offer__name-wrapper">
+              <h1 className="offer__name">
+                {title}
+              </h1>
+              <button
+                className="offer__bookmark-button button"
+                type="button"
+              >
+                <svg
+                  className="offer__bookmark-icon"
+                  width={ICON_SIZE.WIDTH}
+                  height={ICON_SIZE.HEIGHT}
+                >
+                  <use xlinkHref="#icon-bookmark"></use>
+                </svg>
+                <span className="visually-hidden">
+                  ${isFavorite ? 'In bookmarks' : 'To bookmarks'}
+                </span>
+              </button>
             </div>
+            <OfferReting rating={rating} />
+            <OfferFeatures
+              type={type}
+              bedrooms={bedrooms}
+              maxAdults={maxAdults}
+            />
+            <OfferPrice price={price}/>
+            <OfferInside />
+            <OfferHost
+              host={host}
+              description={description}
+            />
+            <OfferReviews />
           </div>
-          <OfferMap />
-        </section>
-        <div className="container">
-          <NearPlaces otherOffersData={otherOffersData} />
         </div>
-      </main>
-    </div>
+        <OfferMap />
+      </section>
+      <div className="container">
+        <NearPlaces otherOffersData={otherOffersData} />
+      </div>
+    </main>
   );
 };
 

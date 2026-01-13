@@ -5,10 +5,11 @@ import Favorites from './pages/favorites/favorites';
 import Login from './pages/login/login';
 import Offer from './pages/offer/offer';
 import { NotFound } from './pages/not-found/not-found';
-import {AppRoute, AutorizationStatus} from './const';
+import {AppRoute} from './const';
 import { PrivateRoute } from './components/private-route/private-route';
 import ScrollToTop from './components/scroll-to-top/scroll-to-top';
 import {HelmetProvider} from 'react-helmet-async';
+import { Layout } from './components/layout/layout';
 
 const OFFERS_COUNT = 5;
 
@@ -17,7 +18,10 @@ const App = () => (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path = {AppRoute.Root} >
+        <Route
+          path = {AppRoute.Root}
+          element = {<Layout />}
+        >
           <Route
             index
             element = {
@@ -30,7 +34,7 @@ const App = () => (
           <Route
             path = {AppRoute.Favorites}
             element = {
-              <PrivateRoute autorizationStatus={AutorizationStatus.NoAuth}>
+              <PrivateRoute>
                 <Favorites />
               </PrivateRoute>
             }
@@ -43,11 +47,11 @@ const App = () => (
             path = {AppRoute.Offer}
             element = {<Offer />}
           />
-          <Route
-            path = '*'
-            element = {<NotFound />}
-          />
         </Route>
+        <Route
+          path = '*'
+          element = {<NotFound />}
+        />
       </Routes>
 
     </BrowserRouter>
