@@ -1,17 +1,8 @@
-//import React from 'react';
+import { CommentsDataType } from '../../../../../types/comments.type.ts';
+import { formatDate } from '../../../../../utils/common.ts';
 
 type ReviewsListPropsType = {
-  commentsData: Array<{
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    comment: string;
-    rating: number;
-  }>;
+  commentsData: CommentsDataType;
 }
 
 const ReviewsList = ({ commentsData }: ReviewsListPropsType) => (
@@ -19,7 +10,9 @@ const ReviewsList = ({ commentsData }: ReviewsListPropsType) => (
   <ul className="reviews__list">
     {
       commentsData.map(({id, date, user, comment, rating}) => {
+
         const commentDate = new Date(date);
+
         return (
           <li className="reviews__item" key={id}>
             <div className="reviews__user user">
@@ -42,7 +35,7 @@ const ReviewsList = ({ commentsData }: ReviewsListPropsType) => (
               </p>
               <time
                 className="reviews__time"
-                dateTime={`${commentDate.getFullYear()}-${commentDate.getMonth()}-${commentDate.getDate()}`}
+                dateTime={formatDate(commentDate)}
               >
                 {`${commentDate.getMonth()} ${commentDate.getFullYear()}`}
               </time>

@@ -1,4 +1,3 @@
-//import React from 'react';
 
 const CitiesMap = () => (
   <div className="cities__right-section">

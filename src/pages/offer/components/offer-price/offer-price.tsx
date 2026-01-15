@@ -1,3 +1,4 @@
+//import { VALUTES } from '../../../../const.ts';
 
 type OfferPricePropsType = {
   price: number;

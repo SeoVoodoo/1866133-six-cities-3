@@ -1,5 +1,5 @@
 
-const LogoSize = {
+const LOGO_SIZE = {
   WIDTH: '81',
   HEIGHT: '41'
 };
@@ -9,8 +9,8 @@ const HeaderLogo = () => (
     className="header__logo"
     src="img/logo.svg"
     alt="6 cities logo"
-    width={LogoSize.WIDTH}
-    height={LogoSize.HEIGHT}
+    width={LOGO_SIZE.WIDTH}
+    height={LOGO_SIZE.HEIGHT}
   />
 );
 

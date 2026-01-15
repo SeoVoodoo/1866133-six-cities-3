@@ -1,7 +1,8 @@
+import { HousingType } from '../../../../const';
 import { capitalizeFirstLetter } from '../../../../utils/common';
 
 type OfferFeaturesPropsType = {
-  type: string;
+  type: `${HousingType.Apartment}` | `${HousingType.Hotel}` | `${HousingType.House}` | `${HousingType.Room}`;
   bedrooms: number;
   maxAdults: number;
 }

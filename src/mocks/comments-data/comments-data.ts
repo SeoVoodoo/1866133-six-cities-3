@@ -1,15 +1,4 @@
-
-type CommentsDataType = Array<{
-    id: string;
-    date: string;
-    user: {
-      name: string;
-      avatarUrl: string;
-      isPro: boolean;
-    };
-    comment: string;
-    rating: number;
-  }>;
+import { CommentsDataType } from '../../types/comments.type.ts';
 
 
 export const commentsData: CommentsDataType = [

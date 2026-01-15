@@ -1,5 +1,6 @@
+import { OffersType } from '../../types/offers.type.ts';
 
-export const otherOffersData = [
+export const otherOffersData: OffersType = [
   {
     'id': '701ba372-1b78-4a55-888f-29d1483b57aa',
     'title': 'Wood and stone place',
