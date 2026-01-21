@@ -1,5 +1,4 @@
 import Home from './pages/home/home';
-import { OffersData } from './mocks/offers-data/offers-data';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Favorites from './pages/favorites/favorites';
 import Login from './pages/login/login';
@@ -10,10 +9,17 @@ import { PrivateRoute } from './components/private-route/private-route';
 import ScrollToTop from './components/scroll-to-top/scroll-to-top';
 import {HelmetProvider} from 'react-helmet-async';
 import { Layout } from './components/layout/layout';
+import { OfferType, ShortenedOfferType } from './types/offer.type';
 
 const OFFERS_COUNT = 5;
 
-const App = () => (
+type AppPropsType = {
+  offersData: OfferType[];
+  favoriteData: ShortenedOfferType[];
+  otherOffersData: ShortenedOfferType[];
+}
+
+const App = ({offersData, favoriteData, otherOffersData}: AppPropsType) => (
   <HelmetProvider>
     <BrowserRouter>
       <ScrollToTop />
@@ -27,7 +33,7 @@ const App = () => (
             element = {
               <Home
                 offersCount={OFFERS_COUNT}
-                offersData={OffersData}
+                offersData={offersData}
               />
             }
           />
@@ -35,7 +41,7 @@ const App = () => (
             path = {AppRoute.Favorites}
             element = {
               <PrivateRoute>
-                <Favorites />
+                <Favorites favorites={favoriteData}/>
               </PrivateRoute>
             }
           />
@@ -45,11 +51,11 @@ const App = () => (
           />
           <Route
             path = {AppRoute.Offer}
-            element = {<Offer />}
+            element = {<Offer offers={offersData} otherOffers={otherOffersData} />}
           />
         </Route>
         <Route
-          path = '*'
+          path = {AppRoute.NotFound}
           element = {<NotFound />}
         />
       </Routes>

@@ -1,26 +1,20 @@
 import PlaceCard from '../../../../components/place-card/place-card';
-import { OffersType } from '../../../../types/offers.type.ts';
+import { ShortenedOfferType } from '../../../../types/offer.type.ts';
 
 type NearPlacesPropsType = {
-  otherOffersData: OffersType;
+  otherOffers: ShortenedOfferType[];
 }
 
-const NearPlaces = ({ otherOffersData }: NearPlacesPropsType) => (
+const NearPlaces = ({ otherOffers }: NearPlacesPropsType) => (
 
   <section className="near-places places">
     <h2 className="near-places__title">Other places in the neighbourhood</h2>
     <div className="near-places__list places__list">
       {
-        otherOffersData.map((offer) => (
+        otherOffers.map((offer) => (
           <PlaceCard
             key={offer.id}
-            title={offer.title}
-            type={offer.type}
-            price={offer.price}
-            isPremium={offer.isPremium}
-            isFavorite={offer.isFavorite}
-            rating={offer.rating}
-            previewImage={offer.previewImage}
+            offer={offer}
             className={'near-places'}
           />
         ))

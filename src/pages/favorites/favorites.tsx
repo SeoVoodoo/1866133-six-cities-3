@@ -1,12 +1,16 @@
-import { favoriteData } from '../../mocks/favorite-data/favorite-data';
+import { ShortenedOfferType } from '../../types/offer.type';
 import { City } from './city';
 
+type FavoritesPropsType = {
+  favorites: ShortenedOfferType[];
+}
 
-const Favorites = () => {
+
+const Favorites = ({favorites}: FavoritesPropsType) => {
 
   const uniqueCityNames: string[] = [];
 
-  favoriteData.forEach((item) => {
+  favorites.forEach((item) => {
     if (!uniqueCityNames.includes(item.city.name)) {
       uniqueCityNames.push(item.city.name);
     }
@@ -23,7 +27,7 @@ const Favorites = () => {
                 <City
                   key={cityName}
                   cityName={cityName}
-                  favoriteData={favoriteData}
+                  favorites={favorites}
                 />
               ))
             }

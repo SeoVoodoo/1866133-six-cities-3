@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import { OffersType } from '../../types/offers.type';
 import PlaceCard from '../../components/place-card/place-card';
+import { ShortenedOfferType } from '../../types/offer.type';
 
 type CityPropsType = {
   cityName: string;
-  favoriteData: OffersType;
+  favorites: ShortenedOfferType[];
 }
 
 
-export const City = ({cityName, favoriteData}: CityPropsType) => (
+export const City = ({cityName, favorites}: CityPropsType) => (
 
   <li className="favorites__locations-items" key={cityName}>
     <div className="favorites__locations locations locations--current">
@@ -20,17 +20,11 @@ export const City = ({cityName, favoriteData}: CityPropsType) => (
     </div>
     <div className="favorites__places">
       {
-        favoriteData.filter((favoriteOffer) => favoriteOffer.city.name === cityName)
-          .map((item) => (
+        favorites.filter((favoriteOffer) => favoriteOffer.city.name === cityName)
+          .map((offer) => (
             <PlaceCard
-              key={item.id}
-              title={item.title}
-              type={item.type}
-              price={item.price}
-              isPremium={item.isPremium}
-              isFavorite={item.isFavorite}
-              rating={item.rating}
-              previewImage={item.previewImage}
+              key={offer.id}
+              offer={offer}
               className={'favorites'}
             />
           ))

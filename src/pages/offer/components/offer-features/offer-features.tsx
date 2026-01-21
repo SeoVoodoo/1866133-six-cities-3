@@ -1,8 +1,7 @@
-import { HousingType } from '../../../../const';
 import { capitalizeFirstLetter } from '../../../../utils/common';
 
 type OfferFeaturesPropsType = {
-  type: HousingType;
+  type: string;
   bedrooms: number;
   maxAdults: number;
 }
@@ -17,10 +16,10 @@ const OfferFeatures = ({type, bedrooms, maxAdults}:OfferFeaturesPropsType) => {
         {upgradeType}
       </li>
       <li className="offer__feature offer__feature--bedrooms">
-        {`${bedrooms} Bedrooms`}
+        {`${bedrooms} ${bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`}
       </li>
       <li className="offer__feature offer__feature--adults">
-        {`Max ${maxAdults} adults`}
+        {`Max ${maxAdults} ${maxAdults > 1 ? 'adults' : 'adult'}`}
       </li>
     </ul>
   );

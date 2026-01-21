@@ -1,16 +1,16 @@
-import PlaceCard from '../../components/place-card/place-card';
 import NavTabs from './components/navigation-tabs/nav-tabs';
 import CitiesMap from './components/cities-map/cities-map';
 import FormSorting from './components/form-sorting/form-sorting';
-import { OffersType } from '../../types/offers.type';
+import { OfferType } from '../../types/offer.type';
+import { OfferList } from './components/offer-list/offer-list';
+
 
 type HomePropsType = {
   offersCount: number;
-  offersData: OffersType;
+  offersData: OfferType[];
 }
 
 const Home = ({ offersCount, offersData }: HomePropsType) => (
-
   <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
     <NavTabs />
@@ -21,21 +21,7 @@ const Home = ({ offersCount, offersData }: HomePropsType) => (
           <b className="places__found">{offersCount} places to stay in Amsterdam</b>
           <FormSorting />
           <div className="cities__places-list places__list tabs__content">
-            {
-              offersData.map((offer) => (
-                <PlaceCard
-                  key={offer.id}
-                  title={offer.title}
-                  type={offer.type}
-                  price={offer.price}
-                  isPremium={offer.isPremium}
-                  isFavorite={offer.isFavorite}
-                  rating={offer.rating}
-                  previewImage={offer.previewImage}
-                  className={'cities'}
-                />
-              ))
-            }
+            <OfferList offers={offersData} />
           </div>
         </section>
         <CitiesMap />

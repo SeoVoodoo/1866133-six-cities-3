@@ -1,5 +1,3 @@
-import { offerData } from '../../mocks/offer-data/offer-data';
-import { otherOffersData } from '../../mocks/other-offers-data/other-offers-data';
 import OfferGallery from './components/offer-gallery/offer-gallery';
 import OfferReting from './components/offer-rating/offer-reting';
 import OfferInside from './components/offer-inside/offer-inside';
@@ -10,26 +8,39 @@ import OfferMap from './components/offer-map/offer-map';
 import OfferPrice from './components/offer-price/offer-price';
 import OfferFeatures from './components/offer-features/offer-features';
 import {Helmet} from 'react-helmet-async';
+import { OfferType, ShortenedOfferType } from '../../types/offer.type';
+import { useParams } from 'react-router-dom';
+import { NotFound } from '../not-found/not-found';
+import { FavoriteButton } from './components/favorite-button/favorite-button';
 
-const Offer = ():JSX.Element => {
+
+type OffersDataPropsType = {
+  offers: OfferType[];
+  otherOffers: ShortenedOfferType[];
+}
+
+const Offer: React.FC<OffersDataPropsType> = ({offers, otherOffers}: OffersDataPropsType) => {
+
+  const {id} = useParams();
+
+  const currentOffer: OfferType | undefined = offers.find((offer) => offer.id === id);
+
+  if(!currentOffer) {
+    return <NotFound />;
+  }
 
   const { title,
     type,
     price,
-    //city,
     isFavorite,
     isPremium,
     rating,
     description,
     bedrooms,
     host,
+    images,
     maxAdults
-  } = offerData;
-
-  const ICON_SIZE = {
-    WIDTH: '31',
-    HEIGHT: '33'
-  };
+  } = currentOffer;
 
 
   return (
@@ -38,7 +49,7 @@ const Offer = ():JSX.Element => {
         <title>Предложение по аренде жилья!</title>
       </Helmet>
       <section className="offer">
-        <OfferGallery />
+        <OfferGallery images={images}/>
         <div className="offer__container container">
           <div className="offer__wrapper">
             {isPremium && (
@@ -50,21 +61,7 @@ const Offer = ():JSX.Element => {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <button
-                className="offer__bookmark-button button"
-                type="button"
-              >
-                <svg
-                  className="offer__bookmark-icon"
-                  width={ICON_SIZE.WIDTH}
-                  height={ICON_SIZE.HEIGHT}
-                >
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">
-                  ${isFavorite ? 'In bookmarks' : 'To bookmarks'}
-                </span>
-              </button>
+              <FavoriteButton isFavorite={isFavorite}/>
             </div>
             <OfferReting rating={rating} />
             <OfferFeatures
@@ -84,7 +81,7 @@ const Offer = ():JSX.Element => {
         <OfferMap />
       </section>
       <div className="container">
-        <NearPlaces otherOffersData={otherOffersData} />
+        <NearPlaces otherOffers={otherOffers} />
       </div>
     </main>
   );

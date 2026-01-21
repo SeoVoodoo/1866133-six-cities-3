@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { offersData } from './mocks/offers-data/offers-data';
+import { favoriteData } from './mocks/favorite-data/favorite-data';
+import { otherOffersData } from './mocks/other-offers-data/other-offers-data';
 
 
 const root = ReactDOM.createRoot(
@@ -9,6 +12,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    < App />
+    < App
+      offersData={offersData}
+      favoriteData={favoriteData}
+      otherOffersData={otherOffersData}
+    />
   </React.StrictMode>
 );

@@ -1,19 +1,34 @@
+import { useNavigate } from 'react-router-dom';
+import { getAutorizationStatus } from '../../../authorization-status';
+import { AppRoute, AutorizationStatus } from '../../../const';
 
 type BookmarkButtonPropsType = {
   isFavorite: boolean;
 }
 
-const BookmarkButton = ({isFavorite}:BookmarkButtonPropsType):JSX.Element => {
+const BOOKMARK_ICON_SIZE = {
+  WIDTH: '18',
+  HEIGHT: '19'
+};
 
-  const BOOKMARK_ICON_SIZE = {
-    WIDTH: '18',
-    HEIGHT: '19'
+const BookmarkButton = ({ isFavorite }: BookmarkButtonPropsType): JSX.Element => {
+
+
+  const navigate = useNavigate();
+  const autorizationStatus = getAutorizationStatus();
+
+  const onBookmarkButtonClick = () => {
+    if (autorizationStatus === AutorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+    }
   };
 
   return (
     <button
-      className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+      className={`place-card__bookmark-button
+        ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
       type="button"
+      onClick={onBookmarkButtonClick}
     >
       <svg
         className="place-card__bookmark-icon"

@@ -1,30 +1,46 @@
-import { HousingType,
+import { Link } from 'react-router-dom';
+import {
   PREVIEW_IMAGE_SIZE_DEFAULT,
   PREVIEW_IMAGE_SIZE_FAVORITES,
 } from '../../const';
-
+import { OfferType, ShortenedOfferType } from '../../types/offer.type';
 import { capitalizeFirstLetter } from '../../utils/common';
 import BookmarkButton from './bookmark-button/bookmark-button';
+import { StarRating } from '../star-rating/star-rating';
 
 type PlaceCardPropsType = {
-  title: string;
-  type: `${HousingType.Apartment}` | `${HousingType.Hotel}` | `${HousingType.House}` | `${HousingType.Room}`;
-  price: number;
-  isPremium: boolean;
-  isFavorite: boolean;
-  rating: number;
-  previewImage: string;
+  offer: OfferType | ShortenedOfferType;
   className: string;
+  handleHoverCard?: (offer?: OfferType) => void;
 }
 
 const PlaceCard = ({
-  title, type, price, isPremium, isFavorite, rating, previewImage, className
+  offer,
+  className,
+  handleHoverCard
 }: PlaceCardPropsType) => {
+
+  const {
+    id,
+    title,
+    type,
+    price,
+    isPremium,
+    isFavorite,
+    rating,
+    previewImage } = offer;
 
   const upgradeType = capitalizeFirstLetter(type);
 
+  const handleMouseOn = () => handleHoverCard && handleHoverCard(offer as OfferType);
+  const handleMouseOff = () => handleHoverCard && handleHoverCard();
+
   return (
-    <article className={`${className}__card place-card`}>
+    <article
+      className={`${className}__card place-card`}
+      onMouseEnter={handleMouseOn}
+      onMouseLeave={handleMouseOff}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -33,7 +49,7 @@ const PlaceCard = ({
       <div
         className={`${className}__image-wrapper place-card__image-wrapper`}
       >
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -47,7 +63,7 @@ const PlaceCard = ({
             `}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className={`${className === 'favorites' ? 'favorites__card-info' : ''} place-card__info `}>
         <div className="place-card__price-wrapper">
@@ -59,18 +75,17 @@ const PlaceCard = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 20}%` }}></span>
+            <StarRating rating={rating} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{upgradeType}</p>
       </div>
     </article>
   );
 };
-
 
 export default PlaceCard;

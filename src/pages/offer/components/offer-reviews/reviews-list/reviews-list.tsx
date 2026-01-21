@@ -1,6 +1,11 @@
 import { CommentsDataType } from '../../../../../types/comments.type.ts';
 import { formatDate } from '../../../../../utils/common.ts';
 
+const AVTAR_SIZE = {
+  WIDTH: '54',
+  HEIGHT: '54'
+};
+
 type ReviewsListPropsType = {
   commentsData: CommentsDataType;
 }
@@ -17,7 +22,13 @@ const ReviewsList = ({ commentsData }: ReviewsListPropsType) => (
           <li className="reviews__item" key={id}>
             <div className="reviews__user user">
               <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
+                <img
+                  className="reviews__avatar user__avatar"
+                  src={user.avatarUrl}
+                  width={AVTAR_SIZE.WIDTH}
+                  height={AVTAR_SIZE.HEIGHT}
+                  alt="Reviews avatar"
+                />
               </div>
               <span className="reviews__user-name">
                 {user.name}
