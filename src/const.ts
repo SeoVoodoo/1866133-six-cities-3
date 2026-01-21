@@ -17,15 +17,12 @@ export enum HousingType {
   Hotel = 'hotel'
 }
 
-export const VALUTES = {
-  EURO: '&euro;'
-};
-
 export enum AppRoute {
   Root = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id'
+  Offer = '/offer',
+  NotFound = '*'
 }
 
 export enum AutorizationStatus {

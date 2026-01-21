@@ -1,12 +1,12 @@
-import { OffersType } from '../../types/offers.type.ts';
+import { ShortenedOfferType } from '../../types/offer.type.ts';
 
-export const otherOffersData: OffersType = [
+export const otherOffersData: ShortenedOfferType[] = [
   {
     'id': '701ba372-1b78-4a55-888f-29d1483b57aa',
     'title': 'Wood and stone place',
     'type': 'room',
     'price': 80,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
     'city': {
       'name': 'Amsterdam',
       'location': {

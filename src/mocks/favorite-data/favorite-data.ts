@@ -1,6 +1,6 @@
-import { OffersType } from '../../types/offers.type.ts';
+import { ShortenedOfferType } from '../../types/offer.type.ts';
 
-export const favoriteData: OffersType = [
+export const favoriteData: ShortenedOfferType[] = [
   {
     'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
     'title': 'Beautiful & luxurious studio at great location',

@@ -1,16 +1,14 @@
-import PlaceCard from '../../components/place-card/place-card';
-import { favoriteData } from '../../mocks/favorite-data/favorite-data';
+import { ShortenedOfferType } from '../../types/offer.type';
+import { City } from './city';
+
+type FavoritesPropsType = {
+  favorites: ShortenedOfferType[];
+}
 
 
-const Favorites = () => {
+const Favorites = ({favorites}: FavoritesPropsType) => {
 
-  const uniqueCityNames: string[] = [];
-
-  favoriteData.forEach((item) => {
-    if(!uniqueCityNames.includes(item.city.name)){
-      uniqueCityNames.push(item.city.name);
-    }
-  });
+  const uniqueCityNames: string[] = [...new Set(favorites.map((item) => item.city.name))];
 
   return (
     <main className="page__main page__main--favorites">
@@ -20,34 +18,11 @@ const Favorites = () => {
           <ul className="favorites__list">
             {
               uniqueCityNames.map((cityName) => (
-
-                <li className="favorites__locations-items" key={cityName}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>{cityName}</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    {
-                      favoriteData.filter((favoriteOffer) => favoriteOffer.city.name === cityName)
-                        .map((item) => (
-                          <PlaceCard
-                            key={item.id}
-                            title={item.title}
-                            type={item.type}
-                            price={item.price}
-                            isPremium={item.isPremium}
-                            isFavorite={item.isFavorite}
-                            rating={item.rating}
-                            previewImage={item.previewImage}
-                            className={'favorites'}
-                          />
-                        ))
-                    }
-                  </div>
-                </li>
+                <City
+                  key={cityName}
+                  cityName={cityName}
+                  favorites={favorites}
+                />
               ))
             }
           </ul>
