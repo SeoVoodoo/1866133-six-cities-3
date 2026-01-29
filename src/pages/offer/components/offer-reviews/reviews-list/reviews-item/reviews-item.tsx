@@ -1,6 +1,6 @@
 import { StarRating } from '../../../../../../components/star-rating/star-rating';
 import { CommentType } from '../../../../../../types/comments.type';
-import { formatDate } from '../../../../../../utils/common';
+import { getFormattedDate } from '../../../../../../utils/common';
 
 const AVTAR_SIZE = {
   WIDTH: '54',
@@ -8,43 +8,40 @@ const AVTAR_SIZE = {
 };
 
 
-export const ReviewsItem = ({id, date, user, comment, rating}: CommentType) => {
-  const commentDate = new Date(date);
+export const ReviewsItem = ({id, date, user, comment, rating}: CommentType) => (
 
-  return (
-    <li className="reviews__item" key={id}>
-      <div className="reviews__user user">
-        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img
-            className="reviews__avatar user__avatar"
-            src={user.avatarUrl}
-            width={AVTAR_SIZE.WIDTH}
-            height={AVTAR_SIZE.HEIGHT}
-            alt="Reviews avatar"
-          />
-        </div>
-        <span className="reviews__user-name">
-          {user.name}
-        </span>
+  <li className="reviews__item" key={id}>
+    <div className="reviews__user user">
+      <div className="reviews__avatar-wrapper user__avatar-wrapper">
+        <img
+          className="reviews__avatar user__avatar"
+          src={user.avatarUrl}
+          width={AVTAR_SIZE.WIDTH}
+          height={AVTAR_SIZE.HEIGHT}
+          alt="Reviews avatar"
+        />
       </div>
-      <div className="reviews__info">
-        <div className="reviews__rating rating">
-          <div className="reviews__stars rating__stars">
-            <StarRating rating={rating} />
-            <span className="visually-hidden">Rating</span>
-          </div>
+      <span className="reviews__user-name">
+        {user.name}
+      </span>
+    </div>
+    <div className="reviews__info">
+      <div className="reviews__rating rating">
+        <div className="reviews__stars rating__stars">
+          <StarRating rating={rating} />
+          <span className="visually-hidden">Rating</span>
         </div>
-        <p className="reviews__text">
-          {comment}
-        </p>
-        <time
-          className="reviews__time"
-          dateTime={formatDate(commentDate)}
-        >
-          {`${commentDate.getMonth()} ${commentDate.getFullYear()}`}
-        </time>
       </div>
-    </li>
-  );
-};
+      <p className="reviews__text">
+        {comment}
+      </p>
+      <time
+        className="reviews__time"
+        dateTime={date.slice(0, 10)}
+      >
+        {getFormattedDate(date)}
+      </time>
+    </div>
+  </li>
+);
 

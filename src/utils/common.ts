@@ -2,7 +2,8 @@ import { AppRoute } from '../const';
 
 const capitalizeFirstLetter = (word:string) => word.charAt(0).toUpperCase() + word.slice(1);
 
-const formatDate = (date: Date) => `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+const getFormattedDate = (date:string) => new Date(date)
+  .toLocaleDateString('en-US', {year: 'numeric', month: 'long'});
 
 const getLayoutState = (pathname: AppRoute) => {
   let rootClassName = '';
@@ -32,4 +33,4 @@ const getRandomIntInRange = (a:number, b:number): number => {
   return Math.floor(result);
 };
 
-export { capitalizeFirstLetter, formatDate, getLayoutState, getRandomIntInRange };
+export { capitalizeFirstLetter, getFormattedDate, getLayoutState, getRandomIntInRange };
