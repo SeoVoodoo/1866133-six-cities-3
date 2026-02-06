@@ -1,17 +1,16 @@
 import { useState } from 'react';
+import { SortOption } from '../../../../const';
 
 const ARROW_SIZE = {
   WIDTH: '7',
-  HEUGHT: '4'
+  HEIGHT: '4'
 };
 
-const SORT_OPTIONS = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
-
-const getIndex = (value:string, arr = SORT_OPTIONS) => arr.findIndex((item) => item === value);
+const SORT_OPTIONS = Object.values(SortOption);
 
 type FormSortingPropsType = {
-  selectedSort: number;
-  setSelectedSort: (option:number) => void;
+  selectedSort: SortOption;
+  setSelectedSort: (option:SortOption) => void;
 }
 
 
@@ -19,16 +18,9 @@ const FormSorting = ({selectedSort, setSelectedSort}: FormSortingPropsType) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleFormSort = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const handleOptionClick = (evt: React.MouseEvent<HTMLElement>) => {
-    const textContent = evt.currentTarget.textContent;
-    if(textContent) {
-      setSelectedSort(getIndex(textContent));
-    }
-    toggleFormSort();
+  const handleOptionClick = (index: number) => {
+    setSelectedSort(SORT_OPTIONS[index]);
+    setIsOpen(false);
   };
 
   return (
@@ -37,13 +29,13 @@ const FormSorting = ({selectedSort, setSelectedSort}: FormSortingPropsType) => {
       <span
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => !isOpen && toggleFormSort()}
+        onClick={() => !isOpen && setIsOpen(true)}
       >
-        {SORT_OPTIONS[selectedSort]}
+        {selectedSort}
         <svg
           className="places__sorting-arrow"
           width={ARROW_SIZE.WIDTH}
-          height={ARROW_SIZE.HEUGHT}
+          height={ARROW_SIZE.HEIGHT}
         >
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
@@ -53,13 +45,13 @@ const FormSorting = ({selectedSort, setSelectedSort}: FormSortingPropsType) => {
         ${isOpen ? 'places__options--opened' : ''}`}
       >
         {
-          SORT_OPTIONS.map((optionName) => (
+          SORT_OPTIONS.map((optionName, index) => (
             <li
               key={optionName}
               tabIndex={0}
               className={`places__option
-                ${getIndex(optionName) === selectedSort ? 'places__option--active' : ''}`}
-              onClick={handleOptionClick}
+                ${optionName === selectedSort ? 'places__option--active' : ''}`}
+              onClick={() => handleOptionClick(index)}
             >
               {optionName}
             </li>

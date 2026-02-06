@@ -32,10 +32,10 @@ export enum AutorizationStatus {
 }
 
 export enum SortOption {
-  Popular = 0,
-  PriceLowToHigh = 1,
-  PriceHighToLow = 2,
-  TopRatedFirst = 3
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
 }
 
 

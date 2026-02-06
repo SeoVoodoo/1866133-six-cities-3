@@ -15,7 +15,7 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   const selectedCity = searchParams.get('city') || citieNames[0];
 
-  const [selectedSort, setSelectedSort] = useState<number>(SortOption.Popular);
+  const [selectedSort, setSelectedSort] = useState<SortOption>(SortOption.Popular);
 
   const [activeCard, setActiveCard] = useState<null | OfferType>(null);
 
