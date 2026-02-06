@@ -23,7 +23,7 @@ const Home = () => {
     setActiveCard(offer || null);
   };
 
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers.offers);
 
   const filteredOffers = offers.filter((offer) => offer.city.name === selectedCity);
 
