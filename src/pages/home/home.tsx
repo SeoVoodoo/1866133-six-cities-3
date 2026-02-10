@@ -6,8 +6,9 @@ import { OfferList } from './components/offer-list/offer-list';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { useSearchParams } from 'react-router-dom';
-import { citieNames, SortOption } from '../../const';
+import { citieNames, RequestStatus, SortOption } from '../../const';
 import OfferListEmpty from '../../components/offer-list-empty/offer-list-empty';
+import { Preloader } from '../../components/preloader/preloader';
 
 
 const Home = () => {
@@ -24,6 +25,12 @@ const Home = () => {
   };
 
   const offers = useAppSelector((state) => state.offers.offers);
+  const status = useAppSelector((state) => state.offers.status);
+
+  if(status === RequestStatus.Loading) {
+    // return <div>Loading...</div>;
+    return <Preloader />;
+  }
 
   const filteredOffers = offers.filter((offer) => offer.city.name === selectedCity);
 

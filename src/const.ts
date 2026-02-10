@@ -38,4 +38,14 @@ export enum SortOption {
   TopRatedFirst = 'Top rated first'
 }
 
+export enum RequestStatus {Idle, Loading, Succes, Failed}
+
+export enum APIRoute {
+  Offers = '/offers',
+  Favorite = '/favorite',
+  Comments = '/comments/{offerId}',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 

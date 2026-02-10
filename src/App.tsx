@@ -11,6 +11,9 @@ import {HelmetProvider} from 'react-helmet-async';
 import { Layout } from './components/layout/layout';
 import { ShortenedOfferType } from './types/offer.type';
 import { CommentType } from './types/comments.type';
+import { useAppDispatch } from './hooks';
+import { useEffect } from 'react';
+import { fetchAllOffers } from './store/offers/offers.thunks';
 
 
 type AppPropsType = {
@@ -19,49 +22,57 @@ type AppPropsType = {
   commentsData: CommentType[];
 }
 
-const App = ({favoriteData, otherOffersData, commentsData}: AppPropsType) => (
-  <HelmetProvider>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path = {AppRoute.Root}
-          element = {<Layout />}
-        >
-          <Route
-            index
-            element = {<Home />}
-          />
-          <Route
-            path = {AppRoute.Favorites}
-            element = {
-              <PrivateRoute>
-                <Favorites favorites={favoriteData}/>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path = {AppRoute.Login}
-            element = {<Login />}
-          />
-          <Route
-            path = {AppRoute.Offer}
-            element = {
-              <Offer
-                otherOffers={otherOffersData}
-                comments={commentsData}
-              />
-            }
-          />
-        </Route>
-        <Route
-          path = {AppRoute.NotFound}
-          element = {<NotFound />}
-        />
-      </Routes>
+const App = ({favoriteData, otherOffersData, commentsData}: AppPropsType) => {
 
-    </BrowserRouter>
-  </HelmetProvider>
-);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  }, [dispatch]);
+
+  return (
+    <HelmetProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route
+            path = {AppRoute.Root}
+            element = {<Layout />}
+          >
+            <Route
+              index
+              element = {<Home />}
+            />
+            <Route
+              path = {AppRoute.Favorites}
+              element = {
+                <PrivateRoute>
+                  <Favorites favorites={favoriteData}/>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path = {AppRoute.Login}
+              element = {<Login />}
+            />
+            <Route
+              path = {AppRoute.Offer}
+              element = {
+                <Offer
+                  otherOffers={otherOffersData}
+                  comments={commentsData}
+                />
+              }
+            />
+          </Route>
+          <Route
+            path = {AppRoute.NotFound}
+            element = {<NotFound />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
+  );
+};
 
 export default App;
