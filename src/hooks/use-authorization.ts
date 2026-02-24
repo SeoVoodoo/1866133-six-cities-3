@@ -1,10 +1,10 @@
 import { AutorizationStatus } from '../const';
 import { useAppSelector } from '.';
-import { authStatusSelector } from '../store';
+import { selectAuthStatus } from '../store/user/user.selector';
 
 export const useAuthorization = () => {
 
-  const status = useAppSelector(authStatusSelector);
+  const status = useAppSelector(selectAuthStatus);
 
   return status === AutorizationStatus.Auth;
 };

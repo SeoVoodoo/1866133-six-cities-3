@@ -1,9 +1,10 @@
 import { FormEvent, Fragment, ReactEventHandler, useRef, useState } from 'react';
-import { useAppDispatch } from '../../../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { postCommentAction } from '../../../../../store/comments/comments.thunks';
 import { useParams } from 'react-router-dom';
 import { processErrorHandle } from '../../../../../components/process-error-handle/process-error-handle';
-import { SERVER_UNAVAILABLE } from '../../../../../const';
+import { RequestStatus, SERVER_UNAVAILABLE } from '../../../../../const';
+import { selectPostCommentStatus } from '../../../../../store/comments/comments.selector';
 
 const STARS = [
   {
@@ -44,22 +45,23 @@ const CommentForm = () => {
 
   const dispatch = useAppDispatch();
   const {id: offerId} = useParams();
+  const postCommentStatus = useAppSelector(selectPostCommentStatus);
 
   const [formData, setFormData] = useState({rating: 0, comment: ''});
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  const isDisabled = postCommentStatus === RequestStatus.Loading;
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleFieldChange:ChangeFieldHandlerType = (evt) => {
     const {name, value} = evt.currentTarget;
     setFormData({
-      ...formData, [name]: name === 'rating' ? +value : value
+      ...formData,
+      [name]: name === 'rating' ? +value : value
     });
   };
 
   const handleSendForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    setIsDisabled(true);
 
     dispatch(postCommentAction({...formData, offerId}))
       .unwrap()
@@ -73,9 +75,6 @@ const CommentForm = () => {
       })
       .catch(() => {
         processErrorHandle(SERVER_UNAVAILABLE);
-      })
-      .finally(() => {
-        setIsDisabled(false);
       });
   };
 

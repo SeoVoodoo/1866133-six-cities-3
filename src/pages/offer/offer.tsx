@@ -18,17 +18,21 @@ import { fetchCommentsAction } from '../../store/comments/comments.thunks';
 import { RequestStatus } from '../../const';
 import { Preloader } from '../../components/preloader/preloader';
 import { fetchNearbyAction } from '../../store/nearby/nearby.thunks';
-import { commentsSelector, nearbySelector, offerSelector, offerStatusSelector } from '../../store';
+import { selectOffer, selectOfferStatus } from '../../store/offer/offer.selector';
+import { selectNearby } from '../../store/nearby/nearby.selector';
+import { selectComments } from '../../store/comments/comments.selector';
+
+const NEAR_BY_OFFERS_LIMIT = 3;
 
 
 const Offer = () => {
 
   const dispatch = useAppDispatch();
 
-  const currentOffer = useAppSelector(offerSelector);
-  const status = useAppSelector(offerStatusSelector);
-  const nearbyOffers = useAppSelector(nearbySelector).slice(0, 3);
-  const comments = useAppSelector(commentsSelector);
+  const currentOffer = useAppSelector(selectOffer);
+  const status = useAppSelector(selectOfferStatus);
+  const nearbyOffers = useAppSelector(selectNearby).slice(0, NEAR_BY_OFFERS_LIMIT);
+  const comments = useAppSelector(selectComments);
 
   const {id} = useParams();
 

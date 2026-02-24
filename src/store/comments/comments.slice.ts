@@ -6,12 +6,14 @@ import { fetchCommentsAction, postCommentAction } from './comments.thunks';
 
 type CommentsState = {
   items: CommentType[] | null;
-  status: RequestStatus;
+  fetchCommentsStatus: RequestStatus;
+  postCommentStatus: RequestStatus;
 }
 
 const initialState: CommentsState = {
   items: null,
-  status: RequestStatus.Idle
+  fetchCommentsStatus: RequestStatus.Idle,
+  postCommentStatus: RequestStatus.Idle
 };
 
 
@@ -22,25 +24,25 @@ const commentsSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(fetchCommentsAction.pending, (state) => {
-        state.status = RequestStatus.Loading;
+        state.fetchCommentsStatus = RequestStatus.Loading;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
-        state.status = RequestStatus.Success;
+        state.fetchCommentsStatus = RequestStatus.Success;
         state.items = action.payload;
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
-        state.status = RequestStatus.Failed;
+        state.fetchCommentsStatus = RequestStatus.Failed;
       })
       .addCase(postCommentAction.pending, (state) => {
-        state.status = RequestStatus.Loading;
+        state.postCommentStatus = RequestStatus.Loading;
       })
       .addCase(postCommentAction.fulfilled, (state, action) => {
         state.items?.push(action.payload);
+        state.postCommentStatus = RequestStatus.Success;
       })
       .addCase(postCommentAction.rejected, (state) => {
-        state.status = RequestStatus.Failed;
+        state.postCommentStatus = RequestStatus.Failed;
       })
 });
 
 export const commentsReducer = commentsSlice.reducer;
-export const commentsActions = {...commentsSlice.actions, fetchCommentsAction, postCommentAction};
