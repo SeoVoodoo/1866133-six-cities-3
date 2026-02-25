@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { CommentType } from '../../../../../types/comments.type.ts';
 import { ReviewsItem } from './reviews-item/reviews-item.tsx';
 
@@ -23,4 +24,6 @@ const ReviewsList = ({ comments }: ReviewsListPropsType) => (
   </ul>
 );
 
-export default ReviewsList;
+const MemoizedReviewsList = memo(ReviewsList);
+
+export default MemoizedReviewsList;

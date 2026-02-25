@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, ReactEventHandler, useRef, useState } from 'react';
+import { FormEvent, Fragment, memo, ReactEventHandler, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import { postCommentAction } from '../../../../../store/comments/comments.thunks';
 import { useParams } from 'react-router-dom';
@@ -146,4 +146,6 @@ const CommentForm = () => {
   );
 };
 
-export default CommentForm;
+const MemoizedCommentForm = memo(CommentForm);
+
+export default MemoizedCommentForm;

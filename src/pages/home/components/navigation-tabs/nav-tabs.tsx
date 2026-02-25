@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { AppRoute, citieNames } from '../../../../const';
+import { memo } from 'react';
 
 
 type NavTabsPropsType = {
@@ -36,4 +37,8 @@ const NavTabs = ({ selectedCity }: NavTabsPropsType) => (
 );
 
 
-export default NavTabs;
+const MemoizedNavTabs = memo(NavTabs);
+
+export default MemoizedNavTabs;
+
+

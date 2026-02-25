@@ -1,8 +1,10 @@
+import { memo } from 'react';
 
 const LOGO_SIZE = {
   WIDTH: '81',
   HEIGHT: '41'
 };
+
 
 const HeaderLogo = () => (
   <img
@@ -14,4 +16,6 @@ const HeaderLogo = () => (
   />
 );
 
-export default HeaderLogo;
+const MemoizedHeaderLogo = memo(HeaderLogo);
+
+export default MemoizedHeaderLogo;

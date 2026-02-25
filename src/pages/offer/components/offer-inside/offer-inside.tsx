@@ -1,3 +1,4 @@
+import { memo } from 'react';
 
 type OfferInsidePropsType = {
   goods: string[];
@@ -18,5 +19,6 @@ const OfferInside = ({goods}: OfferInsidePropsType) => (
   </div>
 );
 
+const MemoizedOfferInside = memo(OfferInside);
 
-export default OfferInside;
+export default MemoizedOfferInside;

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PlaceCard from '../../../../components/place-card/place-card';
 import { OfferType, ShortenedOfferType } from '../../../../types/offer.type';
 
@@ -7,7 +8,7 @@ type OfferListPropsType = {
   handleHoverCard: (offer?: OfferType) => void;
 }
 
-export const OfferList = ({ offers, handleHoverCard }: OfferListPropsType) => (
+const OfferList = ({ offers, handleHoverCard }: OfferListPropsType) => (
   <div className="cities__places-list places__list tabs__content">
     {
       offers.map((offer) => (
@@ -21,3 +22,5 @@ export const OfferList = ({ offers, handleHoverCard }: OfferListPropsType) => (
     }
   </div>
 );
+
+export const MemoizedOfferList = memo(OfferList);

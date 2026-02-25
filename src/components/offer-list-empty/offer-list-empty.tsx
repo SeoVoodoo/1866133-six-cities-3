@@ -1,3 +1,4 @@
+import { memo } from 'react';
 
 const OfferListEmpty = () => (
 
@@ -15,4 +16,6 @@ const OfferListEmpty = () => (
 
 );
 
-export default OfferListEmpty;
+const MemoizedOfferListEmpty = memo(OfferListEmpty);
+
+export default MemoizedOfferListEmpty;

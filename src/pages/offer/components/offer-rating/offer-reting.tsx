@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { StarRating } from '../../../../components/star-rating/star-rating';
 
 type OfferRetingPropsType = {
   rating: number;
 };
 
-const OfferReting = ({rating}: OfferRetingPropsType): JSX.Element => (
+const OfferReting = ({rating}: OfferRetingPropsType) => (
   <div className="offer__rating rating">
     <div className="offer__stars rating__stars">
       <StarRating rating={rating} />
@@ -14,4 +15,6 @@ const OfferReting = ({rating}: OfferRetingPropsType): JSX.Element => (
   </div>
 );
 
-export default OfferReting;
+const MemoizedOfferReting = memo(OfferReting);
+
+export default MemoizedOfferReting ;

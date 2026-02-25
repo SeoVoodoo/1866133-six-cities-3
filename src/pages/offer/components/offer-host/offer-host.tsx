@@ -1,3 +1,4 @@
+import { memo } from 'react';
 
 type OfferHostPropsType = {
   host: {
@@ -44,5 +45,6 @@ const OfferHost = ({ host, description }: OfferHostPropsType) => (
   </div>
 );
 
+const MemoizedOfferHost = memo(OfferHost);
 
-export default OfferHost;
+export default MemoizedOfferHost;
