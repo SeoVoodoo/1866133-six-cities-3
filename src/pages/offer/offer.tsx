@@ -1,15 +1,15 @@
-import OfferGallery from './components/offer-gallery/offer-gallery';
-import OfferReting from './components/offer-rating/offer-reting';
-import OfferInside from './components/offer-inside/offer-inside';
-import OfferHost from './components/offer-host/offer-host';
-import OfferReviews from './components/offer-reviews/offer-reviews';
+import MemoizedOfferGallery from './components/offer-gallery/offer-gallery';
+import MemoizedOfferReting from './components/offer-rating/offer-reting';
+import MemoizedOfferInside from './components/offer-inside/offer-inside';
+import MemoizedOfferHost from './components/offer-host/offer-host';
+import MemoizedOfferReviews from './components/offer-reviews/offer-reviews';
 import NearPlaces from './components/near-places/near-places';
-import OfferPrice from './components/offer-price/offer-price';
-import OfferFeatures from './components/offer-features/offer-features';
+import MemoizedOfferPrice from './components/offer-price/offer-price';
+import MemoizedOfferFeatures from './components/offer-features/offer-features';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { NotFound } from '../not-found/not-found';
-import { FavoriteButton } from './components/favorite-button/favorite-button';
+import { MemoizedFavoriteButton } from './components/favorite-button/favorite-button';
 import CitiesMap from '../home/components/cities-map/cities-map';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
@@ -18,17 +18,21 @@ import { fetchCommentsAction } from '../../store/comments/comments.thunks';
 import { RequestStatus } from '../../const';
 import { Preloader } from '../../components/preloader/preloader';
 import { fetchNearbyAction } from '../../store/nearby/nearby.thunks';
-import { commentsSelector, nearbySelector, offerSelector, offerStatusSelector } from '../../store';
+import { selectOffer, selectOfferStatus } from '../../store/offer/offer.selector';
+import { selectNearby } from '../../store/nearby/nearby.selector';
+import { selectComments } from '../../store/comments/comments.selector';
+
+const NEAR_BY_OFFERS_LIMIT = 3;
 
 
 const Offer = () => {
 
   const dispatch = useAppDispatch();
 
-  const currentOffer = useAppSelector(offerSelector);
-  const status = useAppSelector(offerStatusSelector);
-  const nearbyOffers = useAppSelector(nearbySelector).slice(0, 3);
-  const comments = useAppSelector(commentsSelector);
+  const currentOffer = useAppSelector(selectOffer);
+  const status = useAppSelector(selectOfferStatus);
+  const nearbyOffers = useAppSelector(selectNearby).slice(0, NEAR_BY_OFFERS_LIMIT);
+  const comments = useAppSelector(selectComments);
 
   const {id} = useParams();
 
@@ -69,7 +73,7 @@ const Offer = () => {
         <title>Предложение по аренде жилья!</title>
       </Helmet>
       <section className="offer">
-        <OfferGallery images={images}/>
+        <MemoizedOfferGallery images={images}/>
         <div className="offer__container container">
           <div className="offer__wrapper">
             {isPremium && (
@@ -81,21 +85,21 @@ const Offer = () => {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <FavoriteButton isFavorite={isFavorite}/>
+              <MemoizedFavoriteButton isFavorite={isFavorite}/>
             </div>
-            <OfferReting rating={rating} />
-            <OfferFeatures
+            <MemoizedOfferReting rating={rating} />
+            <MemoizedOfferFeatures
               type={type}
               bedrooms={bedrooms}
               maxAdults={maxAdults}
             />
-            <OfferPrice price={price}/>
-            <OfferInside goods={goods}/>
-            <OfferHost
+            <MemoizedOfferPrice price={price}/>
+            <MemoizedOfferInside goods={goods}/>
+            <MemoizedOfferHost
               host={host}
               description={description}
             />
-            <OfferReviews comments={comments}/>
+            <MemoizedOfferReviews comments={comments}/>
           </div>
         </div>
         <CitiesMap

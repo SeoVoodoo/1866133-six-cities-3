@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../../../const';
 import { useAuthorization } from '../../../../hooks/use-authorization';
+import { memo } from 'react';
 
 type FavoriteButtonPropsType = {
   isFavorite: boolean;
@@ -40,3 +41,6 @@ export const FavoriteButton = ({ isFavorite }: FavoriteButtonPropsType) => {
     </button>
   );
 };
+
+export const MemoizedFavoriteButton = memo(FavoriteButton);
+

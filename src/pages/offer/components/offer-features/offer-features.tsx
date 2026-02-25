@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { capitalizeFirstLetter } from '../../../../utils/common';
 
 type OfferFeaturesPropsType = {
@@ -25,4 +26,6 @@ const OfferFeatures = ({type, bedrooms, maxAdults}:OfferFeaturesPropsType) => {
   );
 };
 
-export default OfferFeatures;
+const MemoizedOfferFeatures = memo(OfferFeatures);
+
+export default MemoizedOfferFeatures;

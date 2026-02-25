@@ -1,8 +1,9 @@
-//import { VALUTES } from '../../../../const.ts';
+import { memo } from 'react';
 
 type OfferPricePropsType = {
   price: number;
 }
+
 const OfferPrice = ({price}:OfferPricePropsType) => (
   <div className="offer__price">
     <b className="offer__price-value">&euro;{price}</b>
@@ -10,4 +11,6 @@ const OfferPrice = ({price}:OfferPricePropsType) => (
   </div>
 );
 
-export default OfferPrice;
+const MemoizedOfferPrice = memo(OfferPrice);
+
+export default MemoizedOfferPrice;

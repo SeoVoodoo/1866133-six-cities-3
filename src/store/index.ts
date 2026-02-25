@@ -6,7 +6,6 @@ import { redirect } from '../store/middlewares/redirect';
 import { offerReducer } from './offer/offer.slice';
 import { commentsReducer } from './comments/comments.slice';
 import { nearbyReducer } from './nearby/nearby.slice';
-import { State } from '../types/state.type';
 
 
 export const api = createApi();
@@ -32,12 +31,3 @@ export const store = configureStore({
     }).concat(redirect)
 
 });
-
-
-export const offerSelector = (state: State) => state.offer.offer;
-export const offerStatusSelector = (state: State) => state.offer.status;
-export const nearbySelector = (state: State) => state.nearby.nearby;
-export const commentsSelector = (state: State) => state.comments.items;
-export const profileSelector = (state: State) => state.user.info;
-export const authStatusSelector = (state: State) => state.user.authorizationStatus;
-

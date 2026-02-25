@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { login } from '../../../../store/user/auth.thunks';
 import { useAppDispatch } from '../../../../hooks';
 
@@ -56,4 +56,7 @@ const LoginForm = () => {
     </form>
   );
 };
-export default LoginForm;
+
+const MemoizedLoginForm = memo(LoginForm);
+
+export default MemoizedLoginForm;

@@ -3,13 +3,13 @@ import { favoriteData } from '../../mocks/favorite-data/favorite-data';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/user/auth.thunks';
-import { profileSelector } from '../../store';
+import { selectProfile } from '../../store/user/user.selector';
 
 const favoriteCount = favoriteData.length;
 
 
 export const AuthorizedMenu = () => {
-  const profile = useAppSelector(profileSelector);
+  const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
 
   return (

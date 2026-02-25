@@ -1,3 +1,4 @@
+import { memo } from 'react';
 
 type OfferGalleryPropsType = {
   images: string[];
@@ -22,5 +23,6 @@ const OfferGallery = ({images}: OfferGalleryPropsType) => (
   </div>
 );
 
+const MemoizedOfferGallery = memo(OfferGallery);
 
-export default OfferGallery;
+export default MemoizedOfferGallery;
