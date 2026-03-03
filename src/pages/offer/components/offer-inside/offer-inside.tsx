@@ -4,7 +4,7 @@ type OfferInsidePropsType = {
   goods: string[];
 }
 
-const OfferInside = ({goods}: OfferInsidePropsType) => (
+const OfferInside = memo(({goods}: OfferInsidePropsType) => (
   <div className="offer__inside">
     <h2 className="offer__inside-title">What&apos;s inside</h2>
     <ul className="offer__inside-list">
@@ -17,8 +17,8 @@ const OfferInside = ({goods}: OfferInsidePropsType) => (
       }
     </ul>
   </div>
-);
+));
 
-const MemoizedOfferInside = memo(OfferInside);
+OfferInside.displayName = 'OfferInside';
 
-export default MemoizedOfferInside;
+export default OfferInside;

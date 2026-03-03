@@ -6,7 +6,7 @@ const LOGO_SIZE = {
 };
 
 
-const HeaderLogo = () => (
+const HeaderLogo = memo(() => (
   <img
     className="header__logo"
     src="img/logo.svg"
@@ -14,8 +14,8 @@ const HeaderLogo = () => (
     width={LOGO_SIZE.WIDTH}
     height={LOGO_SIZE.HEIGHT}
   />
-);
+));
 
-const MemoizedHeaderLogo = memo(HeaderLogo);
+HeaderLogo.displayName = 'HeaderLogo';
 
-export default MemoizedHeaderLogo;
+export default HeaderLogo;

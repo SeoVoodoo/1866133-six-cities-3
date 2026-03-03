@@ -14,7 +14,7 @@ const AVATAR_SIZE = {
   HEIGHT: '74'
 };
 
-const OfferHost = ({ host, description }: OfferHostPropsType) => (
+const OfferHost = memo(({ host, description }: OfferHostPropsType) => (
 
   <div className="offer__host">
     <h2 className="offer__host-title">Meet the host</h2>
@@ -43,8 +43,8 @@ const OfferHost = ({ host, description }: OfferHostPropsType) => (
       </p>
     </div>
   </div>
-);
+));
 
-const MemoizedOfferHost = memo(OfferHost);
+OfferHost.displayName = 'OfferHost';
 
-export default MemoizedOfferHost;
+export default OfferHost;

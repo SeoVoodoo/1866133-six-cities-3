@@ -9,7 +9,7 @@ type NavTabsPropsType = {
 }
 
 
-const NavTabs = ({ selectedCity }: NavTabsPropsType) => (
+const NavTabs = memo(({ selectedCity }: NavTabsPropsType) => (
   <div className="tabs">
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -34,11 +34,10 @@ const NavTabs = ({ selectedCity }: NavTabsPropsType) => (
       </ul>
     </section>
   </div>
-);
+));
 
+NavTabs.displayName = 'NavTabs';
 
-const MemoizedNavTabs = memo(NavTabs);
-
-export default MemoizedNavTabs;
+export default NavTabs;
 
 

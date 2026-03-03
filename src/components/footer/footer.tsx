@@ -8,7 +8,7 @@ const FOOTER_LOGO_SIZE = {
 };
 
 
-const Footer = () => (
+const Footer = memo(() => (
   <footer className="footer container">
     <Link className="footer__logo-link" to={AppRoute.Root}>
       <img
@@ -20,8 +20,8 @@ const Footer = () => (
       />
     </Link>
   </footer>
-);
+));
 
-const MemoizedFooter = memo(Footer);
+Footer.displayName = 'Footer';
 
-export default MemoizedFooter;
+export default Footer;

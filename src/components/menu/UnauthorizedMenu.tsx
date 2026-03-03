@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 import { memo } from 'react';
 
 
-const UnauthorizedMenu = () => (
+export const UnauthorizedMenu = memo(() => (
   <ul className="header__nav-list">
     <li className="header__nav-item user">
       <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
@@ -13,6 +13,6 @@ const UnauthorizedMenu = () => (
       </Link>
     </li>
   </ul>
-);
+));
 
-export const MemoizedUnauthorizedMenu = memo(UnauthorizedMenu);
+UnauthorizedMenu.displayName = 'UnauthorizedMenu';

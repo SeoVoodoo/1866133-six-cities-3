@@ -1,14 +1,14 @@
 import { memo } from 'react';
 import { useAuthorization } from '../../../../hooks/use-authorization';
 import { CommentType } from '../../../../types/comments.type';
-import MemoizedCommentForm from './comment-form/comment-form';
-import MemoizedReviewsList from './reviews-list/reviews-list';
+import CommentForm from './comment-form/comment-form';
+import ReviewsList from './reviews-list/reviews-list';
 
 type OfferReviewsPropsType = {
   comments: CommentType[] | null;
 }
 
-const OfferReviews = ({comments}: OfferReviewsPropsType) => {
+const OfferReviews = memo(({comments}: OfferReviewsPropsType) => {
 
   const isAuthorized = useAuthorization();
 
@@ -18,14 +18,14 @@ const OfferReviews = ({comments}: OfferReviewsPropsType) => {
       {comments && (
         <>
           <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
-          <MemoizedReviewsList comments={comments} />
+          <ReviewsList comments={comments} />
         </>
       )}
-      {isAuthorized && <MemoizedCommentForm />}
+      {isAuthorized && <CommentForm />}
     </section>
   );
-};
+});
 
-const MemoizedOfferReviews = memo(OfferReviews);
+OfferReviews.displayName = 'OfferReviews';
 
-export default MemoizedOfferReviews;
+export default OfferReviews;

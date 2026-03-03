@@ -5,7 +5,7 @@ type OfferRetingPropsType = {
   rating: number;
 };
 
-const OfferReting = ({rating}: OfferRetingPropsType) => (
+const OfferReting = memo(({rating}: OfferRetingPropsType) => (
   <div className="offer__rating rating">
     <div className="offer__stars rating__stars">
       <StarRating rating={rating} />
@@ -13,8 +13,8 @@ const OfferReting = ({rating}: OfferRetingPropsType) => (
     </div>
     <span className="offer__rating-value rating__value">{Math.round(rating)}</span>
   </div>
-);
+));
 
-const MemoizedOfferReting = memo(OfferReting);
+OfferReting.displayName = 'OfferReting';
 
-export default MemoizedOfferReting ;
+export default OfferReting ;

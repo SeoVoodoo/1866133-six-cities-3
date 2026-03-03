@@ -1,4 +1,4 @@
-import MemoizedHeaderLogo from '../header-logo/header-logo';
+import HeaderLogo from '../header-logo/header-logo';
 
 
 const NotLoggedHeader = () => (
@@ -7,7 +7,7 @@ const NotLoggedHeader = () => (
       <div className="header__wrapper">
         <div className="header__left">
           <a className="header__logo-link" href="main.html">
-            <MemoizedHeaderLogo />
+            <HeaderLogo />
           </a>
         </div>
         <nav className="header__nav">

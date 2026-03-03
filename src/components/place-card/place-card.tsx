@@ -8,6 +8,9 @@ import { OfferType, ShortenedOfferType } from '../../types/offer.type';
 import { capitalizeFirstLetter } from '../../utils/common';
 import BookmarkButton from './bookmark-button/bookmark-button';
 import { StarRating } from '../star-rating/star-rating';
+import { changeFavoriteAction, fetchFavoritesAction } from '../../store/favorite/favorite.thunks';
+import { useAppDispatch } from '../../hooks';
+import { fetchAllOffers } from '../../store/offers/offers.thunks';
 
 type PlaceCardPropsType = {
   offer: OfferType | ShortenedOfferType;
@@ -20,6 +23,8 @@ const PlaceCard = ({
   className,
   handleHoverCard
 }: PlaceCardPropsType) => {
+
+  const dispatch = useAppDispatch();
 
   const {
     id,
@@ -35,6 +40,12 @@ const PlaceCard = ({
 
   const handleMouseOn = () => handleHoverCard && handleHoverCard(offer as OfferType);
   const handleMouseOff = () => handleHoverCard && handleHoverCard();
+
+  const onFavoriteButtonClick = () => {
+    dispatch(changeFavoriteAction({offerId: id, isFavorite}));
+    dispatch(fetchFavoritesAction());
+    dispatch(fetchAllOffers());
+  };
 
   return (
     <article
@@ -72,7 +83,11 @@ const PlaceCard = ({
             <b className="place-card__price-value">&euro;{price} </b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkButton isFavorite={isFavorite} />
+          <BookmarkButton
+            isFavorite={isFavorite}
+            className={'place-card'}
+            onFavoriteButtonClick={onFavoriteButtonClick}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

@@ -1,13 +1,13 @@
-import MemoizedNavTabs from './components/navigation-tabs/nav-tabs';
+import NavTabs from './components/navigation-tabs/nav-tabs';
 import CitiesMap from './components/cities-map/cities-map';
 import FormSorting from './components/form-sorting/form-sorting';
 import { OfferType } from '../../types/offer.type';
-import { MemoizedOfferList } from './components/offer-list/offer-list';
+import { OfferList } from './components/offer-list/offer-list';
 import { useCallback, useMemo, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { useSearchParams } from 'react-router-dom';
 import { citieNames, RequestStatus, SortOption } from '../../const';
-import MemoizedOfferListEmpty from '../../components/offer-list-empty/offer-list-empty';
+import OfferListEmpty from '../../components/offer-list-empty/offer-list-empty';
 import { Preloader } from '../../components/preloader/preloader';
 import { selectOffers, selectOffersStatus } from '../../store/offers/offers.selector';
 
@@ -68,9 +68,9 @@ const Home = () => {
   return (
     <main className={`page__main page__main--index ${isEmpty ? 'page__main--index-empty' : ''}`}>
       <h1 className="visually-hidden">Cities</h1>
-      <MemoizedNavTabs selectedCity={selectedCity} />
+      <NavTabs selectedCity={selectedCity} />
       {isEmpty
-        ? <MemoizedOfferListEmpty />
+        ? <OfferListEmpty selectedCity={selectedCity} />
         : (
           <div className="cities">
             <div className="cities__places-container container">
@@ -81,7 +81,7 @@ const Home = () => {
                   selectedSort={selectedSort}
                   setSelectedSort={setSelectedSort}
                 />
-                <MemoizedOfferList
+                <OfferList
                   offers={sortedOffers}
                   handleHoverCard={handleHoverCard}
                 />

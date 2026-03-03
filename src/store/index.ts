@@ -6,6 +6,7 @@ import { redirect } from '../store/middlewares/redirect';
 import { offerReducer } from './offer/offer.slice';
 import { commentsReducer } from './comments/comments.slice';
 import { nearbyReducer } from './nearby/nearby.slice';
+import { favoritesReducer } from './favorite/favorite.slice';
 
 
 export const api = createApi();
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   offer: offerReducer,
   user: userReducer,
   comments: commentsReducer,
-  nearby: nearbyReducer
+  nearby: nearbyReducer,
+  favorites: favoritesReducer
 });
 
 

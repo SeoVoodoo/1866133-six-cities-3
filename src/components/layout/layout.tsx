@@ -1,11 +1,11 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import MemoizedHeaderLogo from '../header-logo/header-logo';
+import HeaderLogo from '../header-logo/header-logo';
 import { AppRoute } from '../../const';
 import { getLayoutState } from '../../utils/common';
 import { AuthorizedMenu } from '../menu/AuthorizedMenu';
-import { MemoizedUnauthorizedMenu } from '../menu/UnauthorizedMenu';
+import { UnauthorizedMenu } from '../menu/UnauthorizedMenu';
 import { useAuthorization } from '../../hooks/use-authorization';
-import MemoizedFooter from '../footer/footer';
+import Footer from '../footer/footer';
 
 
 export const Layout = () => {
@@ -19,7 +19,7 @@ export const Layout = () => {
 
   const isAuthorized = useAuthorization();
 
-  const menu = isAuthorized ? <AuthorizedMenu /> : <MemoizedUnauthorizedMenu />;
+  const menu = isAuthorized ? <AuthorizedMenu /> : <UnauthorizedMenu />;
 
   return (
     <div className={`page ${rootClassName}`}>
@@ -32,7 +32,7 @@ export const Layout = () => {
                 className={`header__logo-link ${linkClassName}`}
                 to={AppRoute.Root}
               >
-                <MemoizedHeaderLogo />
+                <HeaderLogo />
               </Link>
             </div>
             { shouldRenderUser &&
@@ -45,10 +45,9 @@ export const Layout = () => {
 
       <Outlet />
 
-      {shouldRenderFooter && <MemoizedFooter />}
+      {shouldRenderFooter && <Footer />}
 
     </div>
   );
 };
-
 
