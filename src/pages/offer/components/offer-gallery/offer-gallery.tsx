@@ -4,7 +4,7 @@ type OfferGalleryPropsType = {
   images: string[];
 }
 
-const OfferGallery = ({images}: OfferGalleryPropsType) => (
+const OfferGallery = memo(({images}: OfferGalleryPropsType) => (
 
   <div className="offer__gallery-container container">
     <div className="offer__gallery">
@@ -21,8 +21,8 @@ const OfferGallery = ({images}: OfferGalleryPropsType) => (
     </div>
 
   </div>
-);
+));
 
-const MemoizedOfferGallery = memo(OfferGallery);
+OfferGallery.displayName = 'OfferGallery';
 
-export default MemoizedOfferGallery;
+export default OfferGallery;

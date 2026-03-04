@@ -7,7 +7,7 @@ type ReviewsListPropsType = {
   comments: CommentType[];
 }
 
-const ReviewsList = ({ comments }: ReviewsListPropsType) => (
+const ReviewsList = memo(({ comments }: ReviewsListPropsType) => (
   <ul className="reviews__list">
     {
       comments.map(({ id, date, user, comment, rating }) => (
@@ -22,8 +22,8 @@ const ReviewsList = ({ comments }: ReviewsListPropsType) => (
       ))
     }
   </ul>
-);
+));
 
-const MemoizedReviewsList = memo(ReviewsList);
+ReviewsList.displayName = 'ReviewsList';
 
-export default MemoizedReviewsList;
+export default ReviewsList;

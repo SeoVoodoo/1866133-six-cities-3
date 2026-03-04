@@ -2,16 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAuthorization } from '../../../hooks/use-authorization';
 
+
 type BookmarkButtonPropsType = {
   isFavorite: boolean;
+  className: string;
+  onFavoriteButtonClick: () => void;
 }
 
-const BOOKMARK_ICON_SIZE = {
+const ICON_SIZE_STANDART = {
   WIDTH: '18',
   HEIGHT: '19'
 };
 
-const BookmarkButton = ({ isFavorite }: BookmarkButtonPropsType): JSX.Element => {
+const ICON_SIZE_LARGE = {
+  WIDTH: '31',
+  HEIGHT: '33'
+};
+
+
+const BookmarkButton = ({ isFavorite, className, onFavoriteButtonClick }: BookmarkButtonPropsType) => {
 
 
   const navigate = useNavigate();
@@ -20,20 +29,22 @@ const BookmarkButton = ({ isFavorite }: BookmarkButtonPropsType): JSX.Element =>
   const onBookmarkButtonClick = () => {
     if (!isAuthorized) {
       navigate(AppRoute.Login);
+    } else {
+      onFavoriteButtonClick();
     }
   };
 
   return (
     <button
-      className={`place-card__bookmark-button
-        ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+      className={`${className}__bookmark-button
+        ${isFavorite ? `${className}__bookmark-button--active` : ''} button`}
       type="button"
       onClick={onBookmarkButtonClick}
     >
       <svg
-        className="place-card__bookmark-icon"
-        width={BOOKMARK_ICON_SIZE.WIDTH}
-        height={BOOKMARK_ICON_SIZE.HEIGHT}
+        className={`${className}__bookmark-icon`}
+        width={className === 'place-card' ? ICON_SIZE_STANDART.WIDTH : ICON_SIZE_LARGE.WIDTH}
+        height={className === 'place-card' ? ICON_SIZE_STANDART.HEIGHT : ICON_SIZE_LARGE.HEIGHT}
       >
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
@@ -45,3 +56,5 @@ const BookmarkButton = ({ isFavorite }: BookmarkButtonPropsType): JSX.Element =>
 };
 
 export default BookmarkButton;
+
+

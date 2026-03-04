@@ -3,7 +3,7 @@ import { login } from '../../../../store/user/auth.thunks';
 import { useAppDispatch } from '../../../../hooks';
 
 
-const LoginForm = () => {
+const LoginForm = memo(() => {
 
   const dispath = useAppDispatch();
 
@@ -55,8 +55,8 @@ const LoginForm = () => {
       <button className="login__submit form__submit button" type="submit">Sign in</button>
     </form>
   );
-};
+});
 
-const MemoizedLoginForm = memo(LoginForm);
+LoginForm.displayName = 'LoginForm';
 
-export default MemoizedLoginForm;
+export default LoginForm;

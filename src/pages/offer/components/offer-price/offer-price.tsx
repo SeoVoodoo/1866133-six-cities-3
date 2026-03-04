@@ -4,13 +4,13 @@ type OfferPricePropsType = {
   price: number;
 }
 
-const OfferPrice = ({price}:OfferPricePropsType) => (
+const OfferPrice = memo(({price}:OfferPricePropsType) => (
   <div className="offer__price">
     <b className="offer__price-value">&euro;{price}</b>
     <span className="offer__price-text">&nbsp;night</span>
   </div>
-);
+));
 
-const MemoizedOfferPrice = memo(OfferPrice);
+OfferPrice.displayName = 'OfferPrice';
 
-export default MemoizedOfferPrice;
+export default OfferPrice;

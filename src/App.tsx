@@ -9,7 +9,6 @@ import { PrivateRoute } from './components/private-route/private-route';
 import ScrollToTop from './components/scroll-to-top/scroll-to-top';
 import {HelmetProvider} from 'react-helmet-async';
 import { Layout } from './components/layout/layout';
-import { ShortenedOfferType } from './types/offer.type';
 import { useAppDispatch } from './hooks';
 import { useEffect } from 'react';
 import { fetchAllOffers } from './store/offers/offers.thunks';
@@ -17,13 +16,10 @@ import { getToken } from './api/token';
 import { checkAuth } from './store/user/auth.thunks';
 import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './components/browser-history/browser-history';
+import { fetchFavoritesAction } from './store/favorite/favorite.thunks';
 
 
-type AppPropsType = {
-  favoriteData: ShortenedOfferType[];
-}
-
-const App = ({favoriteData}: AppPropsType) => {
+const App = () => {
 
   const dispatch = useAppDispatch();
 
@@ -37,6 +33,7 @@ const App = ({favoriteData}: AppPropsType) => {
   useEffect(() => {
     if(token) {
       dispatch(checkAuth());
+      dispatch(fetchFavoritesAction());
     }
   }, [dispatch, token]);
 
@@ -58,7 +55,7 @@ const App = ({favoriteData}: AppPropsType) => {
               path = {AppRoute.Favorites}
               element = {
                 <PrivateRoute>
-                  <Favorites favorites={favoriteData}/>
+                  <Favorites />
                 </PrivateRoute>
               }
             />

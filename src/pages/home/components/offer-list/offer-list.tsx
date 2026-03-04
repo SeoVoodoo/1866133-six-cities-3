@@ -8,7 +8,7 @@ type OfferListPropsType = {
   handleHoverCard: (offer?: OfferType) => void;
 }
 
-const OfferList = ({ offers, handleHoverCard }: OfferListPropsType) => (
+export const OfferList = memo(({ offers, handleHoverCard }: OfferListPropsType) => (
   <div className="cities__places-list places__list tabs__content">
     {
       offers.map((offer) => (
@@ -21,6 +21,6 @@ const OfferList = ({ offers, handleHoverCard }: OfferListPropsType) => (
       ))
     }
   </div>
-);
+));
 
-export const MemoizedOfferList = memo(OfferList);
+OfferList.displayName = 'OfferList';

@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { favoriteData } from '../../mocks/favorite-data/favorite-data';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/user/auth.thunks';
 import { selectProfile } from '../../store/user/user.selector';
-
-const favoriteCount = favoriteData.length;
+import { useFavoriteCount } from '../../hooks/use-favorite-count';
 
 
 export const AuthorizedMenu = () => {
   const profile = useAppSelector(selectProfile);
   const dispatch = useAppDispatch();
+  const favoriteCount = useFavoriteCount();
 
   return (
     <ul className="header__nav-list">

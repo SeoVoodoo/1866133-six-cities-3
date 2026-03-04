@@ -41,7 +41,7 @@ const declineWord = (count:number, forms:string[]) => count === 1 ? forms[0] : f
 type ChangeFieldHandlerType = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 
 
-const CommentForm = () => {
+const CommentForm = memo(() => {
 
   const dispatch = useAppDispatch();
   const {id: offerId} = useParams();
@@ -144,8 +144,8 @@ const CommentForm = () => {
       </div>
     </form>
   );
-};
+});
 
-const MemoizedCommentForm = memo(CommentForm);
+CommentForm.displayName = 'CommentForm';
 
-export default MemoizedCommentForm;
+export default CommentForm;

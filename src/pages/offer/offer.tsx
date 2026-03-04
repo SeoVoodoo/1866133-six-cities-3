@@ -1,15 +1,14 @@
-import MemoizedOfferGallery from './components/offer-gallery/offer-gallery';
-import MemoizedOfferReting from './components/offer-rating/offer-reting';
-import MemoizedOfferInside from './components/offer-inside/offer-inside';
-import MemoizedOfferHost from './components/offer-host/offer-host';
-import MemoizedOfferReviews from './components/offer-reviews/offer-reviews';
+import OfferGallery from './components/offer-gallery/offer-gallery';
+import OfferReting from './components/offer-rating/offer-reting';
+import OfferInside from './components/offer-inside/offer-inside';
+import OfferHost from './components/offer-host/offer-host';
+import OfferReviews from './components/offer-reviews/offer-reviews';
 import NearPlaces from './components/near-places/near-places';
-import MemoizedOfferPrice from './components/offer-price/offer-price';
-import MemoizedOfferFeatures from './components/offer-features/offer-features';
+import OfferPrice from './components/offer-price/offer-price';
+import OfferFeatures from './components/offer-features/offer-features';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { NotFound } from '../not-found/not-found';
-import { MemoizedFavoriteButton } from './components/favorite-button/favorite-button';
 import CitiesMap from '../home/components/cities-map/cities-map';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
@@ -21,6 +20,9 @@ import { fetchNearbyAction } from '../../store/nearby/nearby.thunks';
 import { selectOffer, selectOfferStatus } from '../../store/offer/offer.selector';
 import { selectNearby } from '../../store/nearby/nearby.selector';
 import { selectComments } from '../../store/comments/comments.selector';
+import BookmarkButton from '../../components/place-card/bookmark-button/bookmark-button';
+import { changeFavoriteAction, fetchFavoritesAction } from '../../store/favorite/favorite.thunks';
+import { fetchAllOffers } from '../../store/offers/offers.thunks';
 
 const NEAR_BY_OFFERS_LIMIT = 3;
 
@@ -34,15 +36,15 @@ const Offer = () => {
   const nearbyOffers = useAppSelector(selectNearby).slice(0, NEAR_BY_OFFERS_LIMIT);
   const comments = useAppSelector(selectComments);
 
-  const {id} = useParams();
+  const {id: offerId} = useParams();
 
   useEffect(() => {
     Promise.all([
-      dispatch(fetchOfferAction(id as string)),
-      dispatch(fetchNearbyAction(id as string)),
-      dispatch(fetchCommentsAction(id as string))
+      dispatch(fetchOfferAction(offerId as string)),
+      dispatch(fetchNearbyAction(offerId as string)),
+      dispatch(fetchCommentsAction(offerId as string))
     ]);
-  }, [dispatch, id]);
+  }, [dispatch, offerId]);
 
   if (status === RequestStatus.Loading) {
     return <Preloader />;
@@ -52,7 +54,8 @@ const Offer = () => {
     return <NotFound />;
   }
 
-  const { title,
+  const { id,
+    title,
     type,
     price,
     isFavorite,
@@ -66,6 +69,13 @@ const Offer = () => {
     maxAdults
   } = currentOffer;
 
+  const onFavoriteButtonClick = () => {
+    dispatch(changeFavoriteAction({offerId: id, isFavorite}));
+    dispatch(fetchFavoritesAction());
+    dispatch(fetchOfferAction(offerId as string));
+    dispatch(fetchAllOffers());
+  };
+
 
   return (
     <main className="page__main page__main--offer">
@@ -73,7 +83,7 @@ const Offer = () => {
         <title>Предложение по аренде жилья!</title>
       </Helmet>
       <section className="offer">
-        <MemoizedOfferGallery images={images}/>
+        <OfferGallery images={images}/>
         <div className="offer__container container">
           <div className="offer__wrapper">
             {isPremium && (
@@ -85,21 +95,25 @@ const Offer = () => {
               <h1 className="offer__name">
                 {title}
               </h1>
-              <MemoizedFavoriteButton isFavorite={isFavorite}/>
+              <BookmarkButton
+                isFavorite={isFavorite}
+                className={'offer'}
+                onFavoriteButtonClick={onFavoriteButtonClick}
+              />
             </div>
-            <MemoizedOfferReting rating={rating} />
-            <MemoizedOfferFeatures
+            <OfferReting rating={rating} />
+            <OfferFeatures
               type={type}
               bedrooms={bedrooms}
               maxAdults={maxAdults}
             />
-            <MemoizedOfferPrice price={price}/>
-            <MemoizedOfferInside goods={goods}/>
-            <MemoizedOfferHost
+            <OfferPrice price={price}/>
+            <OfferInside goods={goods}/>
+            <OfferHost
               host={host}
               description={description}
             />
-            <MemoizedOfferReviews comments={comments}/>
+            <OfferReviews comments={comments}/>
           </div>
         </div>
         <CitiesMap

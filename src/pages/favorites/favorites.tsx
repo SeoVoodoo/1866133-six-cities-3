@@ -1,32 +1,29 @@
-import { ShortenedOfferType } from '../../types/offer.type';
-import { City } from './city';
-
-type FavoritesPropsType = {
-  favorites: ShortenedOfferType[];
-}
+import { useAppSelector } from '../../hooks';
+import { selectFavorites } from '../../store/favorite/favorite.selectors';
+import FavoritesEmpty from './components/favorites-empty';
+import FavoritesList from './components/favorites-list';
 
 
-const Favorites = ({favorites}: FavoritesPropsType) => {
+const Favorites = () => {
 
-  const uniqueCityNames: string[] = [...new Set(favorites.map((item) => item.city.name))];
+  const favorites = useAppSelector(selectFavorites);
+  const hasFavorites = favorites.length > 0;
 
   return (
-    <main className="page__main page__main--favorites">
+    <main className={`
+      page__main
+      page__main--favorites
+      ${hasFavorites ? 'page__main--favorites-empty' : ''}`}
+    >
       <div className="page__favorites-container container">
-        <section className="favorites">
-          <h1 className="favorites__title">Saved listing</h1>
-          <ul className="favorites__list">
-            {
-              uniqueCityNames.map((cityName) => (
-                <City
-                  key={cityName}
-                  cityName={cityName}
-                  favorites={favorites}
-                />
-              ))
-            }
-          </ul>
+
+        <section className={`
+          favorites
+          ${hasFavorites ? 'favorites--empty' : ''}`}
+        >
+          {hasFavorites ? <FavoritesList favorites={favorites} /> : <FavoritesEmpty />}
         </section>
+
       </div>
     </main>
   );

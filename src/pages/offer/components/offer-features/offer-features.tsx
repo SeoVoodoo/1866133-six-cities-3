@@ -7,7 +7,7 @@ type OfferFeaturesPropsType = {
   maxAdults: number;
 }
 
-const OfferFeatures = ({type, bedrooms, maxAdults}:OfferFeaturesPropsType) => {
+const OfferFeatures = memo(({type, bedrooms, maxAdults}:OfferFeaturesPropsType) => {
 
   const upgradeType = capitalizeFirstLetter(type);
 
@@ -24,8 +24,8 @@ const OfferFeatures = ({type, bedrooms, maxAdults}:OfferFeaturesPropsType) => {
       </li>
     </ul>
   );
-};
+});
 
-const MemoizedOfferFeatures = memo(OfferFeatures);
+OfferFeatures.displayName = 'OfferFeatures';
 
-export default MemoizedOfferFeatures;
+export default OfferFeatures;
