@@ -69,7 +69,7 @@ const Offer = () => {
     maxAdults
   } = currentOffer;
 
-  const onFavoriteButtonClick = () => {
+  const handleFavoriteButtonClick = () => {
     dispatch(changeFavoriteAction({offerId: id, isFavorite}));
     dispatch(fetchFavoritesAction());
     dispatch(fetchOfferAction(offerId as string));
@@ -98,7 +98,7 @@ const Offer = () => {
               <BookmarkButton
                 isFavorite={isFavorite}
                 className={'offer'}
-                onFavoriteButtonClick={onFavoriteButtonClick}
+                handleFavoriteButtonClick={handleFavoriteButtonClick}
               />
             </div>
             <OfferReting rating={rating} />
