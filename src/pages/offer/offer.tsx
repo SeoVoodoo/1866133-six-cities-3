@@ -39,10 +39,13 @@ const Offer = () => {
   const {id: offerId} = useParams();
 
   useEffect(() => {
+    if(!offerId) {
+      return;
+    }
     Promise.all([
-      dispatch(fetchOfferAction(offerId as string)),
-      dispatch(fetchNearbyAction(offerId as string)),
-      dispatch(fetchCommentsAction(offerId as string))
+      dispatch(fetchOfferAction(offerId)),
+      dispatch(fetchNearbyAction(offerId)),
+      dispatch(fetchCommentsAction(offerId))
     ]);
   }, [dispatch, offerId]);
 
