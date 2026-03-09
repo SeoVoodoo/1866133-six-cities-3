@@ -16,13 +16,13 @@ import { updateOffers } from '../../store/offers/offers.slice';
 type PlaceCardPropsType = {
   offer: OfferType | ShortenedOfferType;
   className: string;
-  handleHoverCard?: (offer?: OfferType) => void;
+  onHoverCard?: (offer?: OfferType) => void;
 }
 
 const PlaceCard = ({
   offer,
   className,
-  handleHoverCard
+  onHoverCard
 }: PlaceCardPropsType) => {
 
   const dispatch = useAppDispatch();
@@ -39,8 +39,8 @@ const PlaceCard = ({
 
   const upgradeType = capitalizeFirstLetter(type);
 
-  const handleMouseOn = () => handleHoverCard && handleHoverCard(offer as OfferType);
-  const handleMouseOff = () => handleHoverCard && handleHoverCard();
+  const handleMouseOn = () => onHoverCard && onHoverCard(offer as OfferType);
+  const handleMouseOff = () => onHoverCard && onHoverCard();
 
   const handleFavoriteButtonClick = () => {
     dispatch(changeFavoriteAction({offerId: id, isFavorite}))
@@ -87,7 +87,7 @@ const PlaceCard = ({
           <BookmarkButton
             isFavorite={isFavorite}
             className={'place-card'}
-            handleFavoriteButtonClick={handleFavoriteButtonClick}
+            onFavoriteButtonClick={handleFavoriteButtonClick}
           />
         </div>
         <div className="place-card__rating rating">

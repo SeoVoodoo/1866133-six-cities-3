@@ -5,7 +5,7 @@ import { APIRoute } from '../../const';
 
 
 export const fetchFavoritesAction = createAsyncThunk<ShortenedOfferType[], undefined, {extra: AxiosInstance}>(
-  'fetchFavorites',
+  'favorite/fetchFavorites',
   async(_arg, {extra: api}) => {
     const response = await api.get<ShortenedOfferType[]>(APIRoute.Favorite);
     return response.data;

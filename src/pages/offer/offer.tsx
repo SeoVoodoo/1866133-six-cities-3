@@ -105,7 +105,7 @@ const Offer = () => {
               <BookmarkButton
                 isFavorite={isFavorite}
                 className={'offer'}
-                handleFavoriteButtonClick={handleFavoriteButtonClick}
+                onFavoriteButtonClick={handleFavoriteButtonClick}
               />
             </div>
             <OfferReting rating={rating} />
