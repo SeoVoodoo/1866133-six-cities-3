@@ -22,6 +22,12 @@ const offersSlice = createSlice({
     loadOffers(state, action: PayloadAction<OfferType[]>) {
       state.offers = action.payload;
     },
+    updateOffers(state, action: PayloadAction<OfferType>) {
+      const index = state.offers.findIndex((offer) => offer.id === action.payload.id);
+      if(index !== -1) {
+        state.offers[index].isFavorite = action.payload.isFavorite;
+      }
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -38,5 +44,5 @@ const offersSlice = createSlice({
 });
 
 export const offersReducer = offersSlice.reducer;
-export const {loadOffers} = offersSlice.actions;
+export const {loadOffers, updateOffers} = offersSlice.actions;
 
